@@ -17,6 +17,7 @@ src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
 display:none;
 width:100vw;
 height:100vh;
+background:transparent;
 }
 
 #landing{
@@ -30,6 +31,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+gap:2vh;
 
 background-image:url("fondo.webp");
 background-size:clamp(120px, 25vw, 420px);
@@ -40,14 +42,17 @@ box-sizing:border-box;
 }
 
 #titulo-img{
-width:clamp(220px, 70vw, 900px);
-margin-bottom:clamp(20px, 5vh, 60px);
+width:min(92vw, 900px);
+max-height:45vh;
+object-fit:contain;
+
+margin-bottom:clamp(20px, 6vh, 60px);
 }
 
 #start-ar{
-padding:clamp(14px, 2vh, 22px) clamp(28px, 5vw, 60px);
+padding:clamp(16px, 2.5vh, 26px) clamp(32px, 6vw, 70px);
 
-font-size:clamp(16px, 2.8vw, 24px);
+font-size:clamp(18px, 4vw, 26px);
 
 background:white;
 border:none;
@@ -79,8 +84,7 @@ id="viewer"
 src="FiguritaQR.glb"
 ar
 ar-placement="floor"
-ar-scale="fixed"
-scale=".9 .9 .9"
+scale=".6 .6 .6"
 shadow-intensity=".5"
 camera-controls
 interaction-prompt="auto"
@@ -90,11 +94,19 @@ touch-action="none">
 <script>
 const btn = document.getElementById("start-ar");
 const viewer = document.getElementById("viewer");
+const landing = document.getElementById("landing");
 
 btn.addEventListener("click", async () => {
-document.getElementById("landing").style.display = "none";
+landing.style.display = "none";
 viewer.style.display = "block";
 await viewer.activateAR();
+});
+
+viewer.addEventListener("ar-status", (event) => {
+if (event.detail.status === "not-presenting") {
+viewer.style.display = "none";
+landing.style.display = "flex";
+}
 });
 </script>
 

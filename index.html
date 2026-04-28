@@ -32,19 +32,22 @@ justify-content:center;
 align-items:center;
 
 background-image:url("fondo.webp");
-background-size:512px;
+background-size:clamp(120px, 25vw, 420px);
 background-position:center;
 background-repeat:repeat;
+padding:5vh 5vw;
+box-sizing:border-box;
 }
 
 #titulo-img{
-width:clamp(260px,60vw,700px);
-margin-bottom:40px;
+width:clamp(220px, 70vw, 900px);
+margin-bottom:clamp(20px, 5vh, 60px);
 }
 
 #start-ar{
-padding:20px 50px;
-font-size:clamp(18px,2.5vw,24px);
+padding:clamp(14px, 2vh, 22px) clamp(28px, 5vw, 60px);
+
+font-size:clamp(16px, 2.8vw, 24px);
 
 background:white;
 border:none;
@@ -76,6 +79,7 @@ id="viewer"
 src="FiguritaQR.glb"
 ar
 ar-placement="floor"
+ar-scale="fixed"
 scale=".9 .9 .9"
 shadow-intensity=".5"
 camera-controls

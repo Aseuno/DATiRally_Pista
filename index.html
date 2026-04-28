@@ -13,27 +13,35 @@ src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
 
 <style>
 
-body{
-margin:0;
-background:#111;
-font-family:Arial;
-overflow:hidden;
-}
-
-model-viewer{
+#viewer{
+display:none;
 width:100vw;
 height:100vh;
 }
 
-#ar-button{
+#landing{
 position:absolute;
-left:50%;
-bottom:25vh;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
 
-transform:translateX(-50%);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 
-padding:30px 60px;
+color:white;
+text-align:center;
+}
 
+#landing h1{
+font-size:clamp(24px,5vw,42px);
+margin-bottom:40px;
+}
+
+#start-ar{
+padding:20px 50px;
 font-size:clamp(18px,2.5vw,24px);
 
 background:white;
@@ -41,11 +49,7 @@ border:none;
 border-radius:16px;
 
 box-shadow:0 6px 14px rgba(0,0,0,0.35);
-
 cursor:pointer;
-
-z-index:10;
-
 }
 
 </style>
@@ -54,7 +58,16 @@ z-index:10;
 
 <body>
 
+<div id="landing">
+<h1>Descubre la Pista de la siguiente Estación</h1>
+
+<button id="start-ar">
+Ver en AR
+</button>
+</div>
+
 <model-viewer
+id="viewer"
 src="FiguritaQR.glb"
 ar
 ar-placement="floor"
@@ -62,14 +75,22 @@ scale=".9 .9 .9"
 shadow-intensity=".5"
 camera-controls
 interaction-prompt="auto"
-touch-action="pan-y"
-touch-action="pan-x">
-
- <button slot="ar-button" id="ar-button">
-  Ver en AR
-  </button>
-
+touch-action="none">
 </model-viewer>
+
+<script>
+const btn = document.getElementById("start-ar");
+const viewer = document.getElementById("viewer");
+
+btn.addEventListener("click", async () => {
+
+document.getElementById("landing").style.display = "none";
+viewer.style.display = "block";
+
+await viewer.activateAR();
+
+});
+</script>
 
 </body>
 

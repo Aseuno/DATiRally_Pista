@@ -31,12 +31,14 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 
-color:white;
-text-align:center;
+background-image:url("fondo.png");
+background-size:512px;
+background-position:center;
+background-repeat:repeat;
 }
 
-#landing h1{
-font-size:clamp(24px,5vw,42px);
+#titulo-img{
+width:clamp(260px,60vw,700px);
 margin-bottom:40px;
 }
 
@@ -49,6 +51,7 @@ border:none;
 border-radius:16px;
 
 box-shadow:0 6px 14px rgba(0,0,0,0.35);
+
 cursor:pointer;
 }
 
@@ -59,11 +62,13 @@ cursor:pointer;
 <body>
 
 <div id="landing">
-<h1>Descubre la Pista de la siguiente Estación</h1>
+
+<img id="titulo-img" src="titulo.png" alt="Descubre la siguiente pista">
 
 <button id="start-ar">
 Ver en AR
 </button>
+
 </div>
 
 <model-viewer
@@ -83,12 +88,9 @@ const btn = document.getElementById("start-ar");
 const viewer = document.getElementById("viewer");
 
 btn.addEventListener("click", async () => {
-
 document.getElementById("landing").style.display = "none";
 viewer.style.display = "block";
-
 await viewer.activateAR();
-
 });
 </script>
 
